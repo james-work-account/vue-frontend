@@ -1,9 +1,9 @@
 <template>
-  <div v-if="post.id != null" class="post-item">
+  <div v-if="post.id != null" class="container">
     <h1 class="title">{{post.title}}</h1>
-    <p class="body-preview">{{post.body}}</p>
+    <p class="body">{{post.body}}</p>
   </div>
-  <div v-else>nothing to see here</div>
+  <div v-else></div>
 </template>
 
 <script>
@@ -25,8 +25,22 @@
 </script>
 
 <style scoped>
-  .body-preview {
-    font-size: 12px
+  .container {
+    max-width: var(--maxWidth);
+    margin: 15px auto;
+    margin-top: 15px;
+  }
+  .title{
+    margin: auto 0;
+    line-height: 1.35;
+    font-weight: normal;
+    padding-bottom: .25em;
+    margin-bottom: .25em;
+    border-bottom: 1px #ccc dotted;;
+  }
+  .body {
+    margin: 15px 30px;
+    white-space:pre-wrap;
   }
 </style>
 

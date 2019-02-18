@@ -32,4 +32,24 @@ export default {
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.4;
   }
+  .btn {
+    color: #fff;
+    background-color: #5f95ff;
+    border: none;
+    border-color: #07c;
+    padding: .8em;
+    border-radius: 3px;
+    outline: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.15384615;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: 0.2s;
+  }
+  .btn:hover {
+    background-color: #2054bb;
+  }
 </style>

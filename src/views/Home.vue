@@ -6,14 +6,13 @@
 </template>
 
 <script>
-import Posts from './Posts.vue'
-import Header from './Header.vue'
+import Posts from '../components/Posts.vue'
 import axios from 'axios'
 
 export default {
   name: 'home',
   components: {
-    Header, Posts
+    Posts
   },
   data() {
     return {
