@@ -23,6 +23,9 @@ export default {
   .title {
     font-size: 18px;
     margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .body-preview {
     font-size: 12px

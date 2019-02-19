@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import SinglePage from './views/SinglePage.vue'
 import CreatePost from './views/CreatePost.vue'
+import EditPost from './views/EditPost.vue'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/blog/new',
       name: 'create-post',
       component: CreatePost
+    },
+    {
+      path: '/blog/post/:id/edit',
+      name: 'edit-post',
+      component: EditPost
     }
   ],
   mode: 'history'

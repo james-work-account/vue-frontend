@@ -1,11 +1,12 @@
 <template>
   <div>
-    <h1>Create a new post</h1>
+    <h1 v-if="this.id !== ''">Update post</h1>
+    <h1 v-else>Create a new post</h1>
     <form @submit.prevent="addPost">
       <div class="form-title">
-        <label for="title">Title</label>
+        <label for="post-title">Title</label>
         <div class="error-msg" v-if="!$v.title.required && this.submitError">Field is required</div>
-        <input v-bind:class="{ error : !$v.title.required && this.submitError }" type="text" v-model="title" name="title" id="title" placeholder="Title goes here...">
+        <input v-bind:class="{ error : !$v.title.required && this.submitError }" type="text" v-model="title" name="post-title" id="post-title" placeholder="Title goes here..." >
       </div>
       <div class="form-body">
         <label for="body">Body</label>
@@ -13,7 +14,9 @@
         <textarea v-bind:class="{ error : !$v.body.required && this.submitError }" v-model="body" id="body" name="body" cols="50" rows="3"></textarea>
       </div>
       <div class="submit">
-        <input type="submit" value="Submit" class="btn"><div></div>
+        <input type="submit" value="Submit" class="btn">
+        <router-link v-if="this.id == ''" tag="button" :to="{ name: 'home' }" class="btn">Cancel</router-link>
+        <router-link v-else tag="button" :to="{ name: 'view-post', params: { id: this.id } }" class="btn">Cancel</router-link>
       </div>
     </form>
   </div>
@@ -21,42 +24,54 @@
 
 <script>
 import uuid from 'uuid';
-import { required, minLength } from 'vuelidate/lib/validators';
+import { required } from 'vuelidate/lib/validators';
+import axios from 'axios';
 
 export default {
     name: "CreatePost",
     data() {
       return {
+        submitError: false,
+        id: '',
         title: '',
-        body: '',
-        submitError: false
+        body: ''
       }
     },
     validations: {
       title: {
-        required,
-        minLength: minLength(1)
+        required
       },
       body: {
-        required,
-        minLength: minLength(1)
+        required
       }
     },
     methods: {
       addPost(e) {
         e.preventDefault();
+        const newId = this.id == '' ? uuid.v4() : this.id
         const newPost = {
-          id: uuid.v4(),
+          id: newId,
           title: this.title,
           body: this.body
         }
         this.$v.$touch()
-      if (this.$v.$invalid) {
-        this.submitError = true;
-      } else {
-        this.$emit('add-post', newPost);
+        if (this.$v.$invalid) {
+          this.submitError = true;
+        } else {
+          this.$emit('add-post', newPost);
+        }
       }
-      }
+    },
+    created() {
+      axios.get('http://localhost:9000/posts/' + this.$route.params.id)
+        .then(res => {
+          if(res.status === 200) {
+            this.id = res.data.id
+            this.title = res.data.title
+            this.body = res.data.body
+          }
+        })
+        .catch(err => console.log(err))
     }
 }
 </script>
@@ -113,6 +128,9 @@ export default {
   }
   .submit {
     flex-direction: row;
+  }
+  .submit button {
+    background-color: #999;
   }
   input[type="submit"] {
     padding-right: 1.2em;

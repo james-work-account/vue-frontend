@@ -14,14 +14,14 @@ export default {
     CreatePostBody
   },
   methods: {
-    addPost(newPost) {
+    addPost(postToEdit) {
       axios.post("http://localhost:9000/posts", {
-        id: newPost.id,
-        title: newPost.title,
-        body: newPost.body
+        id: postToEdit.id,
+        title: postToEdit.title,
+        body: postToEdit.body
       })
       .then(_ => {
-        const id = newPost.id
+        const id = postToEdit.id
         this.$router.push({ name: 'view-post', params: { id }})
       })
       .catch(err => console.log(err.response.data))

@@ -22,11 +22,12 @@ export default {
     border-bottom: 1px #ccc dotted;
     display: flex;
     flex-direction: column;
-    max-width: var(--maxWidth);
+    max-width: var(--maxHomePostWidth);
     margin: 0 auto;
   }
   html {
     --maxWidth: 1284px;
+    --maxHomePostWidth: var(--maxWidth);
   }
   body {
     font-family: Arial, Helvetica, sans-serif;
@@ -41,7 +42,7 @@ export default {
     border-radius: 3px;
     outline: none;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 400;
     line-height: 1.15384615;
     text-decoration: none;
