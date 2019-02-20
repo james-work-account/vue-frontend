@@ -26,8 +26,13 @@ export default {
     margin: 0 auto;
   }
   html {
-    --maxWidth: 1284px;
+    --maxWidth: 90%;
     --maxHomePostWidth: var(--maxWidth);
+  }
+  @media(max-width: 800px) {
+    html {
+      --maxWidth: 100%
+    }
   }
   body {
     font-family: Arial, Helvetica, sans-serif;
@@ -52,5 +57,8 @@ export default {
   }
   .btn:hover {
     background-color: #2054bb;
+  }
+  #app > div {
+    padding: 0 20px
   }
 </style>

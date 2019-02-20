@@ -3,8 +3,11 @@
     <div v-bind:class="{ show: confirmDelete }" class="confirm-delete-msg"><DeletePostMessage v-bind:post="this.post" v-on:del-post="deleteOrCloseBox" /></div>
     <div>
       <div class="title">
-        <h1>{{post.title}}</h1>
-        <div>
+        <div class="title-text">
+          <h1>{{post.title}}</h1>
+          <p>- {{this.post.time}}</p>
+        </div>
+        <div class="title-buttons">
           <router-link tag="button" class="btn" :to="{ name: 'edit-post', params: { id: this.post.id } }">Edit</router-link>
           <button class="btn" @click="toggleDeleteMessage()">Delete</button>
         </div>
@@ -35,7 +38,6 @@
         this.confirmDelete = !this.confirmDelete
       },
       deleteOrCloseBox(bool) {
-        console.log(this.post)
         if(bool) {
           this.deleteMessage(this.post)
         } else {
@@ -43,14 +45,15 @@
         }
       },
       deleteMessage(postToDelete) {
-        console.log(postToDelete)
         axios.post('http://localhost:9000/posts/delete', {
           id: postToDelete.id,
+          time: postToDelete.time,
           title: postToDelete.title,
           body: postToDelete.body
         })
+        .then()
         .catch(err => console.log(err.response.data))
-        .then(this.$router.push({ name: 'home'}))
+        .finally(this.$router.push({ name: 'home' }))
       }
     },
     created() {
@@ -93,12 +96,17 @@
     display: flex;
     flex-direction: row;
   }
-  .title h1 {
-    flex: 8;
+  .title .title-text {
+    flex: 9;
     word-break: break-all;
+    margin-left: 1rem;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between
   }
-  .title div {
-    flex: 4;
+  .title .title-buttons {
+    flex: 3;
     display: flex;
     justify-content: flex-end;
     align-items: center
@@ -110,6 +118,9 @@
   .body {
     margin: 15px 30px;
     white-space:pre-wrap;
+  }
+  h1 {
+    margin: 15px 0;
   }
 </style>
 

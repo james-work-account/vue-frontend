@@ -33,6 +33,7 @@ export default {
       return {
         submitError: false,
         id: '',
+        time: new Date(),
         title: '',
         body: ''
       }
@@ -51,6 +52,7 @@ export default {
         const newId = this.id == '' ? uuid.v4() : this.id
         const newPost = {
           id: newId,
+          time: this.time,
           title: this.title,
           body: this.body
         }
@@ -67,6 +69,7 @@ export default {
         .then(res => {
           if(res.status === 200) {
             this.id = res.data.id
+            this.time = res.data.time
             this.title = res.data.title
             this.body = res.data.body
           }

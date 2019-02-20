@@ -17,6 +17,7 @@ export default {
     addPost(postToEdit) {
       axios.post("http://localhost:9000/posts", {
         id: postToEdit.id,
+        time: postToEdit.time,
         title: postToEdit.title,
         body: postToEdit.body
       })

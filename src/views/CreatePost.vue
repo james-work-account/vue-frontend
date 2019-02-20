@@ -7,6 +7,7 @@
 <script>
 import CreatePostBody from '../components/CreatePostBody.vue'
 import axios from 'axios'
+import moment from 'moment'
 
 export default {
   name: "CreatePost",
@@ -17,6 +18,7 @@ export default {
     addPost(newPost) {
       axios.post("http://localhost:9000/posts", {
         id: newPost.id,
+        time: moment().format('Do MMMM YYYY, h:mm:ss a'),
         title: newPost.title,
         body: newPost.body
       })

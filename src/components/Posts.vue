@@ -1,27 +1,34 @@
 <template>
   <div>
-    <div v-if="posts && posts.length">
-      <div v-bind:key="post.id" v-for="post in posts">
-        <Post v-bind:post="post" />
-      </div>
-    </div>
+    <Loading v-if="loading" />
     <div v-else>
-      <p>No posts found</p>
+      <div v-if="posts && posts.length">
+        <div v-bind:key="post.id" v-for="post in posts">
+          <Post v-bind:post="post" />
+        </div>
+      </div>
+      <div v-else>
+        <p>No posts found</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Post from './PostItem.vue'
+import Loading from './Loading.vue'
 
 export default {
   name: 'Posts',
   components: {
-    Post
+    Post, Loading
   },
   props: {
-    posts: Array,
-    default: []
+    posts: {
+      type: Array,
+      default: []
+    },
+    loading: Boolean
   }
   
 }

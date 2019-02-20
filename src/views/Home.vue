@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Blog Entries</h1>
-    <Posts v-bind:posts="posts" />
+    <Posts v-bind:posts="posts" v-bind:loading="loading" />
   </div>
 </template>
 
@@ -16,13 +16,39 @@ export default {
   },
   data() {
     return {
-      posts: null
+      posts: null,
+      loading: false
     }
   },
-  created() {
-    axios.get('http://localhost:9000/posts')
-      .then(res => this.posts = res.data)
-      .catch(err => console.log(err))
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.getData();
+      next()
+    })
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.posts = null;
+    next(vm => {
+      vm.getData();
+      next()
+    })
+  },
+  methods: {
+    getData() {
+      this.loading = true;
+      setTimeout(() => {
+        this.searchInitialized = true;
+        axios.get('http://localhost:9000/posts')
+          .then(res => {
+            this.posts = res.data;
+            this.loading = false;
+          })
+          .catch(err => {
+            console.log(err)
+            this.loading = false;
+          })
+      }, 1000)
+    }
   }
 }
 </script>
