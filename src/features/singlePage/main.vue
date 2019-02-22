@@ -1,6 +1,6 @@
 <template>
   <div v-if="post.id != null" class="container">
-    <div v-bind:class="{ show: confirmDelete }" class="confirm-delete-msg"><DeletePostMessage v-bind:post="this.post" v-on:del-post="deleteOrCloseBox" /></div>
+    <div v-bind:class="{ show: confirmDelete }" class="confirm-delete-msg"><DeleteMessage v-bind:post="this.post" v-on:del-post="deleteOrCloseBox" /></div>
     <div>
       <div class="title">
         <div class="title-text">
@@ -20,12 +20,12 @@
 
 <script>
   import axios from 'axios'
-  import DeletePostMessage from "../components/DeletePostMessage.vue"
+  import DeleteMessage from "./deleteMessage.vue"
 
   export default {
     name: "PostItem",
     components: {
-      DeletePostMessage
+      DeleteMessage
     },
     data() {
       return {

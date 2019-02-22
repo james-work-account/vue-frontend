@@ -23,11 +23,11 @@
 </template>
 
 <script>
-import uuid from 'uuid';
-import { required } from 'vuelidate/lib/validators';
-import axios from 'axios';
+  import uuid from 'uuid';
+  import { required } from 'vuelidate/lib/validators';
+  import axios from 'axios';
 
-export default {
+  export default {
     name: "CreatePost",
     data() {
       return {
@@ -76,7 +76,7 @@ export default {
         })
         .catch(err => console.log(err))
     }
-}
+  }
 </script>
 
 <style scoped>

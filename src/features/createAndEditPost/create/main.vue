@@ -1,18 +1,18 @@
 <template>
   <div>
-    <CreatePostBody v-on:add-post="addPost" />
+    <Body v-on:add-post="addPost" />
   </div>
 </template>
 
 <script>
-import CreatePostBody from '../components/CreatePostBody.vue'
+import Body from '@/features/createAndEditPost/body.vue'
 import axios from 'axios'
 import moment from 'moment'
 
 export default {
   name: "CreatePost",
   components: {
-    CreatePostBody
+    Body
   },
   methods: {
     addPost(newPost) {

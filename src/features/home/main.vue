@@ -1,13 +1,15 @@
 <template>
   <div>
     <h1>Blog Entries</h1>
-    <Posts v-bind:posts="posts" v-bind:loading="loading" />
+    <Posts v-bind:posts="posts" v-bind:loading="this.$store.state.common.loading" />
   </div>
 </template>
 
 <script>
-import Posts from '../components/Posts.vue'
+import Posts from './posts.vue'
 import axios from 'axios'
+import { createNamespacedHelpers } from 'vuex'
+const { mapActions } = createNamespacedHelpers('common')
 
 export default {
   name: 'home',
@@ -16,8 +18,7 @@ export default {
   },
   data() {
     return {
-      posts: null,
-      loading: false
+      posts: null
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -34,20 +35,22 @@ export default {
     })
   },
   methods: {
+    ...mapActions([
+      'updateLoading'
+    ]),
     getData() {
-      this.loading = true;
+      this.updateLoading(true);
       setTimeout(() => {
-        this.searchInitialized = true;
         axios.get('http://localhost:9000/posts')
           .then(res => {
             this.posts = res.data;
-            this.loading = false;
+            this.updateLoading(false);
           })
           .catch(err => {
             console.log(err)
-            this.loading = false;
+            this.updateLoading(false);
           })
-      }, 1000)
+      }, 500)
     }
   }
 }

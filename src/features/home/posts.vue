@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import Post from './PostItem.vue'
-import Loading from './Loading.vue'
+import Post from './postitem.vue'
+import Loading from '@/components/loading.vue'
 
 export default {
   name: 'Posts',
