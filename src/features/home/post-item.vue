@@ -1,13 +1,13 @@
-<template>
-    <router-link tag="div" :to="{ name: 'view-post', params: { id: this.post.id }}" class="post-item">
-        <div class="left">
-          <p class="title">{{post.title}}</p>
-          <p class="body-preview">{{post.minBody}}</p>
-        </div>
-        <div class="right">
-          <p class="time">{{post.time}}</p>
-        </div>
-    </router-link>
+<template lang="pug">
+  router-link.post-item(
+    tag="div"
+    :to="{ name: 'view-post', params: { id: this.post.id }}"
+  )
+    .left
+      p.title {{post.title}}
+      p.body-preview {{post.minBody}}
+    .right
+      p.time {{post.time}}
 </template>
 
 <script>

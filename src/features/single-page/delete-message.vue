@@ -1,10 +1,10 @@
-<template>
-  <div class="container">
-    <div class="body">
-      <p>Are you sure you want to delete this post?</p>
-      <div class="buttons"><button class="btn" @click="$emit('del-post', true)">Yes</button><button class="btn" @click="$emit('del-post', false, postToDelete)">No</button></div>
-    </div>
-  </div>
+<template lang="pug">
+  .container
+    .body
+      p Are you sure you want to delete this post?
+      .buttons
+        button.btn(@click="$emit('del-post', true)") Yes
+        button.btn(@click="$emit('del-post', false, post)") No
 </template>
 
 <script>

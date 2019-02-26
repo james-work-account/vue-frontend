@@ -1,21 +1,16 @@
-<template>
-  <div>
-    <Loading v-if="loading" />
-    <div v-else>
-      <div v-if="posts && posts.length">
-        <div v-bind:key="post.id" v-for="post in posts">
-          <Post v-bind:post="post" />
-        </div>
-      </div>
-      <div v-else>
-        <p>No posts found</p>
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  .container
+    Loading(v-if="loading")
+    div(v-else)
+      div(v-if="posts && posts.length")
+        div(v-bind:key="post.id" v-for="post in posts")
+          Post(v-bind:post="post")
+      div(v-else)
+        p No posts found
 </template>
 
 <script>
-import Post from './postitem.vue'
+import Post from './post-item.vue'
 import Loading from '@/components/loading.vue'
 
 export default {

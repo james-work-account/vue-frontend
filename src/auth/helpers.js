@@ -1,4 +1,20 @@
-// import axios from 'axios'
+import router from '@/http/router'
+import store from '@/store'
 
-// const baseUrl = "http://localhost:9000"
+function clearAll() {
+  store.dispatch('common/clear');
+  store.dispatch('auth/clear');
+  localStorage.clear();
+}
 
+export default {
+  logout () {
+    clearAll();
+    router.push({ name: 'login' })
+  },
+
+  login(user) {
+    store.dispatch('auth/login', user)
+    router.push({ name: 'home' })
+  }
+}

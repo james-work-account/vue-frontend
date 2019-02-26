@@ -1,17 +1,19 @@
-<template>
-  <div id="app">
-    <Header />
-    <router-view></router-view>
-  </div>
+<template lang="pug">
+  #app
+    LoggedIn(v-if="this.$store.state.auth.isLoggedIn")/
+    LoggedOut(v-else)/
 </template>
 
 <script>
-import Header from './components/header.vue'
+import Header from '@/components/header.vue'
+import router from '@/http/router'
+import LoggedIn from '@/layouts/logged-in.vue'
+import LoggedOut from '@/layouts/logged-out.vue'
 
 export default {
   name: 'app',
   components: {
-    Header
+    LoggedIn, LoggedOut
   }
 }
 </script>
@@ -58,7 +60,7 @@ export default {
   .btn:hover {
     background-color: #2054bb;
   }
-  #app > div {
+  #app > div > *:not(header) {
     padding: 0 20px
   }
 </style>

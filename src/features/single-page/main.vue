@@ -1,26 +1,22 @@
-<template>
-  <div v-if="post.id != null" class="container">
-    <div v-bind:class="{ show: confirmDelete }" class="confirm-delete-msg"><DeleteMessage v-bind:post="this.post" v-on:del-post="deleteOrCloseBox" /></div>
-    <div>
-      <div class="title">
-        <div class="title-text">
-          <h1>{{post.title}}</h1>
-          <p>- {{this.post.time}}</p>
-        </div>
-        <div class="title-buttons">
-          <router-link tag="button" class="btn" :to="{ name: 'edit-post', params: { id: this.post.id } }">Edit</router-link>
-          <button class="btn" @click="toggleDeleteMessage()">Delete</button>
-        </div>
-      </div>
-      <p class="body">{{post.body}}</p>
-    </div>
-  </div>
-  <div v-else></div>
+<template lang="pug">
+  .container(v-if="post.id != null")
+    .confirm-delete-msg(v-bind:class="{ show: confirmDelete }")
+      DeleteMessage(v-bind:post="this.post" v-on:del-post="deleteOrCloseBox")/
+    div
+      .title
+        .title-text
+          h1 {{post.title}}
+          p Created on: {{this.post.time}}
+        .title-buttons
+          router-link.btn(tag="button" :to="{ name: 'edit-post', params: { id: this.post.id } }") Edit
+          button.btn(@click="toggleDeleteMessage()") Delete
+      p.body {{post.body}}
+  div(v-else)/
 </template>
 
 <script>
   import axios from 'axios'
-  import DeleteMessage from "./deleteMessage.vue"
+  import DeleteMessage from "./delete-message.vue"
 
   export default {
     name: "PostItem",

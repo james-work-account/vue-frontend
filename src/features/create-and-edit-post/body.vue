@@ -1,25 +1,34 @@
-<template>
-  <div>
-    <h1 v-if="this.id !== ''">Update post</h1>
-    <h1 v-else>Create a new post</h1>
-    <form @submit.prevent="addPost">
-      <div class="form-title">
-        <label for="post-title">Title</label>
-        <div class="error-msg" v-if="!$v.title.required && this.submitError">Field is required</div>
-        <input v-bind:class="{ error : !$v.title.required && this.submitError }" type="text" v-model="title" name="post-title" id="post-title" placeholder="Title goes here..." >
-      </div>
-      <div class="form-body">
-        <label for="body">Body</label>
-        <div class="error-msg" v-if="!$v.body.required && this.submitError">Field is required</div>
-        <textarea v-bind:class="{ error : !$v.body.required && this.submitError }" v-model="body" id="body" name="body" cols="50" rows="3"></textarea>
-      </div>
-      <div class="submit">
-        <input type="submit" value="Submit" class="btn">
-        <router-link v-if="this.id == ''" tag="button" :to="{ name: 'home' }" class="btn">Cancel</router-link>
-        <router-link v-else tag="button" :to="{ name: 'view-post', params: { id: this.id } }" class="btn">Cancel</router-link>
-      </div>
-    </form>
-  </div>
+<template lang="pug">
+  div
+    h1(v-if="this.id !== ''") Update post
+    h1(v-else) Create a new post
+    form(@submit.prevent="addPost")
+      .form-title
+        label(for="post-title") Title
+        .error-msg(v-if="!$v.title.required && this.submitError") Field is required
+        input(
+          v-bind:class="{ error : !$v.title.required && this.submitError }"
+          type="text"
+          v-model="title"
+          name="post-title"
+          id="post-title"
+          placeholder="Title goes here..."
+        )
+      .form-body
+        label(for="body") Body
+        .error-msg(v-if="!$v.body.required && this.submitError") Field is required
+        textarea(
+          v-bind:class="{ error : !$v.body.required && this.submitError }"
+          v-model="body"
+          id="body"
+          name="body"
+          cols="50"
+          rows="3"
+        )/
+      .submit
+        input.btn(type="submit" value="Submit")
+        router-link.btn(v-if="this.id == ''" tag="button" :to="{ name: 'home' }") Cancel
+        router-link.btn(v-else tag="button" :to="{ name: 'view-post', params: { id: this.id } }") Cancel
 </template>
 
 <script>
@@ -86,7 +95,7 @@
     display: flex;
     flex-direction: column
   }
-  @media (max-width:1284px) {
+  @media (max-width:800px) {
     form {
       width: 100%
     }

@@ -1,5 +1,5 @@
-<template>
-    <div />
+<template lang="pug">
+    div/
 </template>
 
 <script>
@@ -11,7 +11,7 @@ export default {
 <style scoped>
   div {
     border: 5px solid #f3f3f3;
-    animation: spin 1s linear infinite;
+    animation: spin 0.75s linear infinite;
     border-top: 5px solid #555;
     border-radius: 50%;
     width: 50px;

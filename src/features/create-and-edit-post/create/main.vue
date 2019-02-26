@@ -1,11 +1,10 @@
-<template>
-  <div>
-    <Body v-on:add-post="addPost" />
-  </div>
+<template lang="pug">
+  .container
+    Body(v-on:add-post="addPost")/
 </template>
 
 <script>
-import Body from '@/features/createAndEditPost/body.vue'
+import Body from '@/features/create-and-edit-post/body.vue'
 import axios from 'axios'
 import moment from 'moment'
 

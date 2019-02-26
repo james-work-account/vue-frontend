@@ -1,15 +1,17 @@
-<template>
-<router-link tag="header" :to="{ name: 'home', cache: false }">
-  <div class="header-title"><h1>James's Blog</h1></div>
-  <div class="header-create-blogpost">
-    <router-link tag="button" :to="{ name: 'create-post' }" class="btn">Create new blog post</router-link>
-  </div>
-</router-link>
+<template lang="pug">
+header
+  .header-title
+    router-link(tag="h1" :to="{ name: 'home', cache: false }") James's Blog
+  .header-create-blogpost
+    router-link.btn(tag="button" :to="{ name: 'create-post' }") Create new blog post
+    settings
 </template>
 
 <script>
+import settings from './settings-menu.vue'
 export default {
-  name: "Header"
+  name: "Header",
+  components: { settings }
 }
 </script>
 
@@ -26,14 +28,13 @@ export default {
     align-items: center;
     background: #100e17;
     border-bottom: 1px solid #201c29;
+    position: sticky
   }
   .header-title {
     padding: 5px 15px;
     color: #fff;
-    cursor: pointer;
-    transition: 0.2s;
   }
-  .header-title:hover {
+  h1:hover {
     color: rgb(214, 214, 214);
   }
   .header-create-blogpost {
@@ -43,5 +44,11 @@ export default {
   }
   header * {
     flex-grow: 1
+  }
+  h1 {
+    transition: 0.2s;
+    margin-left: 20px;
+    display: inline-block;
+    cursor: pointer;
   }
 </style>

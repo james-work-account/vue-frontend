@@ -1,5 +1,5 @@
 const defaults = {
-  loading: false
+  loading: true
 }
 
 export default {
@@ -8,11 +8,17 @@ export default {
   mutations: {
     updateLoading(state, loading) {
       state.loading = loading
+    },
+    clear(state) {
+      Object.assign({}, defaults)
     }
   },
   actions: {
     updateLoading({ commit }, loading) {
       commit('updateLoading', loading)
+    },
+    clear({ commit }) {
+      commit('clear')
     }
   }
 }

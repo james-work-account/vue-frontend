@@ -1,8 +1,7 @@
-<template>
-  <div>
-    <h1>Blog Entries</h1>
-    <Posts v-bind:posts="posts" v-bind:loading="this.$store.state.common.loading" />
-  </div>
+<template lang="pug">
+  .container
+    h1 Blog Entries
+    Posts(v-bind:posts="posts" v-bind:loading="this.$store.state.common.loading")/
 </template>
 
 <script>
@@ -27,7 +26,7 @@ export default {
       next()
     })
   },
-  beforeRouteUpdate (to, from, next) {
+  beforeEnter (to, from, next) {
     this.posts = null;
     next(vm => {
       vm.getData();
@@ -40,7 +39,6 @@ export default {
     ]),
     getData() {
       this.updateLoading(true);
-      setTimeout(() => {
         axios.get('http://localhost:9000/posts')
           .then(res => {
             this.posts = res.data;
@@ -50,7 +48,6 @@ export default {
             console.log(err)
             this.updateLoading(false);
           })
-      }, 500)
     }
   }
 }
